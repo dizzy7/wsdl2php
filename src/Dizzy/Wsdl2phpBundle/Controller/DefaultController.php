@@ -73,8 +73,14 @@ class DefaultController extends Controller
     {
         $zip = new \ZipArchive();
         $zip->open($_SERVER['DOCUMENT_ROOT'].'/out/'. $folder . '.zip',ZIPARCHIVE::CREATE);
-        $options = array('remove_all_path' => TRUE);
-        $zip->addGlob($this->tempPath . $folder.'/*.php', GLOB_BRACE,$options);
+        $dir = scandir($this->tempPath.$folder);
+        foreach ($dir as $file) {
+            if(strpos($file,'.')===0){
+                continue;
+            }
+            $zip->addFile($this->tempPath.$folder.'/'.$file,$file);
+        }
+
         $zip->close();
     }
 }
