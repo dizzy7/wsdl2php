@@ -1,0 +1,5 @@
+dizzy_wsdl2php:
+    resource: "@DizzyWsdl2phpBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
