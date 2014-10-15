@@ -35,8 +35,20 @@ class DefaultController extends Controller
             $rand           = $this->getTempPath();
             $folder         = $this->tempPath . $rand;
 
-            $url = $form->get('path')->getData();
-            $this->generate($url, $folder);
+
+
+            $generator = new \Wsdl2PhpGenerator\Generator();
+            $generator->generate(
+                new Config(
+                    $url = $form->get('path')->getData(),
+                    $folder,
+                    false,
+                    false,
+                    false,
+                    false,
+                    ($form->get('namespace')->getData()) ?: false
+                )
+            );
 
             $this->compress($rand);
 
@@ -48,17 +60,6 @@ class DefaultController extends Controller
             'form' => $form->createView(),
             'file' => $file
         ];
-    }
-
-    private function generate($url, $folder)
-    {
-        $generator = new \Wsdl2PhpGenerator\Generator();
-        $generator->generate(
-            new Config(
-                $url,
-                $folder
-            )
-        );
     }
 
     private function getTempPath()

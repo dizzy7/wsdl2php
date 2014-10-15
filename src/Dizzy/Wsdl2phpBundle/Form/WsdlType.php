@@ -13,6 +13,7 @@ class WsdlType extends AbstractType {
     {
         $builder
             ->add('path','text',['label'=>'Wsdl url (with http(s)://)'])
+            ->add('namespace','text',['label'=>'Namespace','required'=>false])
             ->add('generate','submit')
         ;
     }

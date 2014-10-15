@@ -7,8 +7,11 @@ class Wsdl {
 
     /**
      * @Assert\Url()
+     * @Assert\NotBlank()
      */
     protected $path;
+
+    protected $nameSpace;
 
     /**
      * @return mixed
@@ -25,5 +28,23 @@ class Wsdl {
     {
         $this->path = $path;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getNameSpace()
+    {
+        return $this->nameSpace;
+    }
+
+    /**
+     * @param mixed $nameSpace
+     */
+    public function setNameSpace($nameSpace)
+    {
+        $this->nameSpace = $nameSpace;
+    }
+
+
 
 } 
