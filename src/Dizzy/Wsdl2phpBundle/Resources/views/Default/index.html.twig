@@ -1,5 +1,10 @@
 {% extends 'DizzyWsdl2phpBundle::layout.html.twig' %}
 
 {% block body %}
-Hello!
+{{ form(form) }}
+
+{% if file %}
+    <hr>
+    <a href="/out/{{ file }}.zip"><b>Download</b></a>
+{% endif %}
 {% endblock %}
