@@ -36,17 +36,21 @@ class DefaultController extends Controller
             $folder         = $this->tempPath . $rand;
 
 
+            $url = $form->get('path')->getData();
+            $namespace = ($form->get('namespace')->getData()) ?: false;
+
+            $url = '/home/dizzy/wsdl/1.xml';
 
             $generator = new \Wsdl2PhpGenerator\Generator();
             $generator->generate(
                 new Config(
-                    $url = $form->get('path')->getData(),
+                    $url,
                     $folder,
                     false,
                     false,
                     false,
                     false,
-                    ($form->get('namespace')->getData()) ?: false,
+                    $namespace,
                     array(),
                     '',
                     '',

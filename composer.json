@@ -18,7 +18,7 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "wsdl2phpgenerator/wsdl2phpgenerator": "~2.5",
+        "dizzy7/wsdl2phpgenerator": "dev-master",
         "braincrafted/bootstrap-bundle": "~2.1",
         "twbs/bootstrap": "3.0.*",
         "jquery/jquery":  "1.11.1"
@@ -73,6 +73,10 @@
                     "type": "file"
                 }
             }
+        },
+        {
+            "type":"git",
+            "url":"https://github.com/dizzy7/wsdl2phpgenerator.git"
         }
     ]
 }

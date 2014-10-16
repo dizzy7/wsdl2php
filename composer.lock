@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "25de50c8e06afa18bb148b7bc0f5c301",
+    "hash": "f2fa0517f40ae675a159b5177e3efff5",
     "packages": [
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -65,6 +65,49 @@
                 "bootstrap"
             ],
             "time": "2014-08-31 10:47:30"
+        },
+        {
+            "name": "dizzy7/wsdl2phpgenerator",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dizzy7/wsdl2phpgenerator.git",
+                "reference": "4964200c2dc9323cc9ed4c518aee1877102a433f"
+            },
+            "require": {
+                "ext-soap": "*",
+                "php": ">=5.3.0",
+                "psr/log": "~1.0",
+                "symfony/console": "~2.3"
+            },
+            "require-dev": {
+                "kasperg/phing-github": "0.2.*",
+                "kherge/box": "2.4.*",
+                "phing/phing": "~2.7",
+                "php-vcr/phpunit-testlistener-vcr": "1.1.*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "bin": [
+                "wsdl2php"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Wsdl2PhpGenerator\\": [
+                        "src/",
+                        "lib/"
+                    ]
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Simple utility and class library for generating php classes from a wsdl file.",
+            "keywords": [
+                "soap",
+                "wsdl"
+            ],
+            "time": "2014-10-16 17:55:08"
         },
         {
             "name": "doctrine/annotations",
@@ -351,16 +394,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.4.2",
+            "version": "v2.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "fec965d330c958e175c39e61c3f6751955af32d0"
+                "reference": "0368bc031976126e5d36d37d2c56155092b6575b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/fec965d330c958e175c39e61c3f6751955af32d0",
-                "reference": "fec965d330c958e175c39e61c3f6751955af32d0",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/0368bc031976126e5d36d37d2c56155092b6575b",
+                "reference": "0368bc031976126e5d36d37d2c56155092b6575b",
                 "shasum": ""
             },
             "require": {
@@ -372,7 +415,7 @@
                 "symfony/console": "~2.0"
             },
             "suggest": {
-                "symfony/console": "Allows use of the command line interface"
+                "symfony/console": "For helpful console commands such as SQL execution and import of files."
             },
             "type": "library",
             "autoload": {
@@ -386,23 +429,20 @@
             ],
             "authors": [
                 {
-                    "name": "Jonathan Wage",
-                    "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
-                },
-                {
-                    "name": "Guilherme Blanco",
-                    "email": "guilhermeblanco@gmail.com",
-                    "homepage": "http://www.instaclick.com"
-                },
-                {
                     "name": "Roman Borschel",
                     "email": "roman@code-factory.org"
                 },
                 {
                     "name": "Benjamin Eberlei",
                     "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
                 }
             ],
             "description": "Database Abstraction Layer",
@@ -413,7 +453,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2014-01-01 16:43:57"
+            "time": "2014-10-16 11:56:49"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -1667,56 +1707,6 @@
                 "templating"
             ],
             "time": "2014-10-10 14:09:53"
-        },
-        {
-            "name": "wsdl2phpgenerator/wsdl2phpgenerator",
-            "version": "2.5.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/wsdl2phpgenerator/wsdl2phpgenerator.git",
-                "reference": "9670e4c187175b1355363b9ce3277660e786b4ea"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/wsdl2phpgenerator/wsdl2phpgenerator/zipball/9670e4c187175b1355363b9ce3277660e786b4ea",
-                "reference": "9670e4c187175b1355363b9ce3277660e786b4ea",
-                "shasum": ""
-            },
-            "require": {
-                "ext-soap": "*",
-                "php": ">=5.3.0",
-                "psr/log": "~1.0",
-                "symfony/console": "~2.3"
-            },
-            "require-dev": {
-                "kasperg/phing-github": "0.2.*",
-                "kherge/box": "2.4.*",
-                "phing/phing": "~2.7",
-                "php-vcr/phpunit-testlistener-vcr": "1.1.*",
-                "phpunit/phpunit": "~4.0"
-            },
-            "bin": [
-                "wsdl2php"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Wsdl2PhpGenerator\\": [
-                        "src/",
-                        "lib/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Simple utility and class library for generating php classes from a wsdl file.",
-            "keywords": [
-                "soap",
-                "wsdl"
-            ],
-            "time": "2014-09-11 08:22:19"
         }
     ],
     "packages-dev": [
@@ -1771,7 +1761,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "dizzy7/wsdl2phpgenerator": 20
+    },
     "prefer-stable": false,
     "platform": {
         "php": ">=5.3.3"
