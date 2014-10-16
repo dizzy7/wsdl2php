@@ -55,7 +55,7 @@ class DefaultController extends Controller
                     '',
                     true,
                     true,
-                    true,
+                    false,
                     false
                 )
             );
