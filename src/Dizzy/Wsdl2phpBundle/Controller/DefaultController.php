@@ -46,7 +46,17 @@ class DefaultController extends Controller
                     false,
                     false,
                     false,
-                    ($form->get('namespace')->getData()) ?: false
+                    ($form->get('namespace')->getData()) ?: false,
+                    array(),
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    true,
+                    true,
+                    false,
+                    false
                 )
             );
 
