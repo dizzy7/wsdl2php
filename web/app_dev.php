@@ -8,6 +8,7 @@ use Symfony\Component\Debug\Debug;
 //umask(0000);
 
 
+var_dump(in_array($_SERVER['HTTP_X_REAL_IP'],array('84.17.27.174'));
 
 // This check prevents access to debug front controllers that are deployed by accident to production servers.
 // Feel free to remove this, extend it, or make something more sophisticated.
