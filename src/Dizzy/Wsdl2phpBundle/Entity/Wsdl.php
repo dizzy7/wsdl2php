@@ -5,13 +5,27 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class Wsdl {
 
-    /**
-     * @Assert\Url()
-     * @Assert\NotBlank()
-     */
     protected $path;
 
     protected $nameSpace;
+
+    protected $file;
+
+    /**
+     * @return mixed
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param mixed $file
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+    }
 
     /**
      * @return mixed

@@ -12,7 +12,8 @@ class WsdlType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('path','text',['label'=>'Wsdl url (with http(s)://)'])
+            ->add('path','text',['label'=>'Wsdl url (with http(s)://)','required'=>false])
+            ->add('file','file',['label'=>'Or upload file directly','required'=>false])
             ->add('namespace','text',['label'=>'Namespace','required'=>false])
             ->add('generate','submit')
         ;

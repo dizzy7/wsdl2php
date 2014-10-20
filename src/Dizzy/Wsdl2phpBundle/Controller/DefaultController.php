@@ -8,7 +8,11 @@ use Dizzy\Wsdl2phpBundle\Form\WsdlType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\UrlValidator;
 use Wsdl2PhpGenerator\Config;
 use ZipArchive;
 
@@ -28,49 +32,70 @@ class DefaultController extends Controller
 
         $form->handleRequest($request);
 
-        $file = false;
+        $fileData = false;
 
         if ($form->isValid()) {
-            $this->tempPath = realpath($_SERVER['DOCUMENT_ROOT'] . '/../tmp/') . '/';
-            $rand           = $this->getTempPath();
-            $folder         = $this->tempPath . $rand;
 
+            /** @var UploadedFile $fileData */
+            $fileData = $form->get('file')->getData();
+            $pathData = $form->get('path')->getData();
 
-            $url = $form->get('path')->getData();
-            $namespace = ($form->get('namespace')->getData()) ?: false;
+            if ($fileData || $pathData) {
+                $this->tempPath = realpath($_SERVER['DOCUMENT_ROOT'] . '/../tmp/') . '/';
+                $rand           = $this->getTempPath();
+                $folder         = $this->tempPath . $rand;
 
-            $generator = new \Wsdl2PhpGenerator\Generator();
-            $generator->generate(
-                new Config(
-                    $url,
-                    $folder,
-                    false,
-                    false,
-                    false,
-                    false,
-                    $namespace,
-                    array(),
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    true,
-                    true,
-                    false,
-                    false
-                )
-            );
+                if ($fileData) {
+                    $fileData->move($folder, 'wsdl.xml');
+                    $xml = file_get_contents($folder . '/wsdl.xml');
+                } else {
+                    $xml = file_get_contents($pathData);
+                    file_put_contents($folder . '/wsdl.xml', $xml);
+                }
+                
+                libxml_use_internal_errors(true);
+                $xmlTest = simplexml_load_string($xml);
+                if ($xmlTest === false) {
+                    $form->addError(new FormError('Invalid xml file'));
+                } else {
+                    $namespace = ($form->get('namespace')->getData()) ?: false;
 
-            $this->compress($rand);
+                    $generator = new \Wsdl2PhpGenerator\Generator();
+                    $generator->generate(
+                        new Config(
+                            $folder . '/wsdl.xml',
+                            $folder,
+                            false,
+                            false,
+                            false,
+                            false,
+                            $namespace,
+                            array(),
+                            '',
+                            '',
+                            '',
+                            '',
+                            '',
+                            true,
+                            true,
+                            false,
+                            false
+                        )
+                    );
 
-            $file = $rand;
+                    $this->compress($rand);
 
+                    $fileData = $rand;
+                }
+
+            } else {
+                $form->addError(new FormError('You must specify the url or upload a file'));
+            }
         }
 
         return [
             'form' => $form->createView(),
-            'file' => $file
+            'file' => $fileData
         ];
     }
 
@@ -85,13 +110,13 @@ class DefaultController extends Controller
     private function compress($folder)
     {
         $zip = new \ZipArchive();
-        $zip->open($_SERVER['DOCUMENT_ROOT'].'/out/'. $folder . '.zip',ZIPARCHIVE::CREATE);
-        $dir = scandir($this->tempPath.$folder);
+        $zip->open($_SERVER['DOCUMENT_ROOT'] . '/out/' . $folder . '.zip', ZIPARCHIVE::CREATE);
+        $dir = scandir($this->tempPath . $folder);
         foreach ($dir as $file) {
-            if(strpos($file,'.')===0){
+            if (strpos($file, '.') === 0) {
                 continue;
             }
-            $zip->addFile($this->tempPath.$folder.'/'.$file,$file);
+            $zip->addFile($this->tempPath . $folder . '/' . $file, $file);
         }
 
         $zip->close();
